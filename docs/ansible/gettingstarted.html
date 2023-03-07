@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3. Getting Started &mdash; DevOps 1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/max_width.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="0. Introduction" href="../project/introduction.html" />
+    <link rel="prev" title="2. Ansible architecture" href="architecture.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            DevOps
+              <img src="../_static/Logo.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Ansible</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">0. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">2. Ansible architecture</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../project/introduction.html">0. Introduction</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DevOps</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">3. Getting Started</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/ansible/gettingstarted.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started">
+<h1>3. Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
+<p>We will install Docker in WSL (there are some problems with getting the network working between WSL and docker containers)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ansible is being used to configure virtual machines, we can configure containers (normally we create an image that we will reuse)</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Upgrade all WSL packages</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>upgrade
+
+<span class="c1"># Install dependencies</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>apt-transport-https<span class="w"> </span>ca-certificates<span class="w"> </span>curl<span class="w"> </span>gnupg-agent<span class="w"> </span>software-properties-common
+curl<span class="w"> </span>-fsSL<span class="w"> </span>https://download.docker.com/linux/ubuntu/gpg<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>add<span class="w"> </span>-
+
+<span class="c1"># Add new repository</span>
+sudo<span class="w"> </span>add-apt-repository<span class="w"> </span><span class="s2">&quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu </span><span class="k">$(</span>lsb_release<span class="w"> </span>-cs<span class="k">)</span><span class="s2"> stable&quot;</span>
+
+<span class="c1"># Pull all the new changes from the new added repository</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>docker-ce<span class="w"> </span>docker-ce.cli<span class="w"> </span>containerd.io
+
+<span class="c1"># Run docker service</span>
+sudo<span class="w"> </span>service<span class="w"> </span>docker<span class="w"> </span>start
+
+<span class="c1"># Check if docker is running</span>
+sudo<span class="w"> </span>service<span class="w"> </span>docker<span class="w"> </span>start
+
+<span class="c1"># Create a new interactive Ubuntu container named managed_node1 running bash</span>
+docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>managed_node1<span class="w"> </span>-it<span class="w"> </span>ubuntu<span class="w"> </span>bash
+
+<span class="c1"># Check running containers</span>
+docker<span class="w"> </span>ps
+
+<span class="c1"># Find out IPAddress</span>
+docker<span class="w"> </span>inspect<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;{{ .NetworkSettings.IPAddress }}&quot;</span><span class="w"> </span>nginx
+
+<span class="c1"># or</span>
+docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>managed_node1<span class="w"> </span>bash
+hostname<span class="w"> </span>-I
+
+<span class="c1"># To access via SSH server it needs an SSH server installed</span>
+apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt<span class="w"> </span>-y<span class="w"> </span>install<span class="w"> </span>openssh-server
+
+<span class="c1"># allow to login as root account via SSH.</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;PermitRootLogin yes&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/ssh/sshd_config
+
+<span class="c1"># change the password for the account</span>
+passwd
+
+<span class="c1"># start the SSH service on the container.</span>
+/etc/init.d/ssh<span class="w"> </span>start
+
+<span class="c1"># check that the service is running</span>
+/etc/init.d/ssh<span class="w"> </span>status
+
+<span class="c1"># Exchange keys between systems</span>
+ssh-copy-id<span class="w"> </span>root@172.17.0.2
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are 2 ways to connect to the: password or key. We prefer to use keys.</p>
+</div>
+<section id="setup-the-configuration-and-inventory">
+<h2>Setup the configuration and inventory<a class="headerlink" href="#setup-the-configuration-and-inventory" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>create a new file <code class="docutils literal notranslate"><span class="pre">ansible.cfg</span></code></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>defaults<span class="o">]</span>
+<span class="nv">inventory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>inventory
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>create a new file <code class="docutils literal notranslate"><span class="pre">inventory</span></code></p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>nodes<span class="o">]</span>
+<span class="m">172</span>.17.0.2<span class="w">             </span><span class="nv">ansible_connection</span><span class="o">=</span>ssh<span class="w">        </span><span class="nv">ansible_user</span><span class="o">=</span>root
+</pre></div>
+</div>
+</section>
+<section id="running-ansible">
+<h2>Running Ansible<a class="headerlink" href="#running-ansible" title="Permalink to this heading"></a></h2>
+<p>There are 2 ways of running Ansible:</p>
+<ol class="arabic simple">
+<li><p>Adhoc commands</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># This command will check if you have a connection to the managed nodes</span>
+ansible<span class="w"> </span>nodes<span class="w"> </span>-m<span class="w"> </span>ping
+
+<span class="c1"># This command will allow you to run a shell session on the managed node</span>
+ansible<span class="w"> </span>nodes<span class="w"> </span>-m<span class="w"> </span>shell<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;hostname&quot;</span>
+
+<span class="c1"># Create a new file in /tmp</span>
+ansible<span class="w"> </span>nodes<span class="w"> </span>-m<span class="w"> </span>shell<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;touch /tmp/example1&quot;</span>
+
+<span class="c1"># Check the newly created file</span>
+ansible<span class="w"> </span>nodes<span class="w"> </span>-m<span class="w"> </span>shell<span class="w"> </span>-a<span class="w"> </span><span class="s2">&quot;ls -l /tmp/example1&quot;</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Playbook</p></li>
+</ol>
+<section id="file-manipulation">
+<h3>File manipulation<a class="headerlink" href="#file-manipulation" title="Permalink to this heading"></a></h3>
+<p>Create a new file <code class="docutils literal notranslate"><span class="pre">create_new_file.yml</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-<span class="w"> </span>name:<span class="w"> </span>Create<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>file
+hosts:<span class="w"> </span>nodes
+tasks:
+
+<span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>Change<span class="w"> </span>file<span class="w"> </span>ownership,<span class="w"> </span>group,<span class="w"> </span>and<span class="w"> </span>permissions
+<span class="w">      </span>ansible.builtin.file:
+<span class="w">        </span>path:<span class="w"> </span>/tmp/example2
+<span class="w">        </span>owner:<span class="w"> </span>root
+<span class="w">        </span>group:<span class="w"> </span>root
+<span class="w">        </span>mode:<span class="w"> </span><span class="s1">&#39;0644&#39;</span>
+<span class="w">        </span>state:<span class="w"> </span>touch
+
+<span class="w">    </span>-<span class="w"> </span>name:<span class="w"> </span>Remove<span class="w"> </span>previous<span class="w"> </span>file
+<span class="w">      </span>ansible.builtin.file:
+<span class="w">        </span>path:<span class="w"> </span>/tmp/example
+<span class="w">        </span>state:<span class="w"> </span>absent
+</pre></div>
+</div>
+</section>
+<section id="user-manipulation">
+<h3>User manipulation<a class="headerlink" href="#user-manipulation" title="Permalink to this heading"></a></h3>
+<p>Create a new file <code class="docutils literal notranslate"><span class="pre">create_users_groups.yml</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Create</span> <span class="n">a</span> <span class="n">new</span> <span class="n">file</span>
+  <span class="n">hosts</span><span class="p">:</span> <span class="n">nodes</span>
+  <span class="n">tasks</span><span class="p">:</span>
+
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Create</span> <span class="n">multiple</span> <span class="n">groups</span>
+      <span class="n">ansible</span><span class="o">.</span><span class="n">builtin</span><span class="o">.</span><span class="n">group</span><span class="p">:</span>
+        <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;{{ item }}&quot;</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">present</span>
+      <span class="n">loop</span><span class="p">:</span>
+        <span class="o">-</span> <span class="n">developers</span>
+        <span class="o">-</span> <span class="n">operators</span>
+        <span class="o">-</span> <span class="n">admins</span>
+
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Add</span> <span class="n">the</span> <span class="n">user</span> <span class="s1">&#39;user1&#39;</span> <span class="k">with</span> <span class="n">a</span> <span class="n">specific</span> <span class="n">uid</span> <span class="mi">7654</span> <span class="ow">and</span> <span class="n">a</span> <span class="n">primary</span> <span class="n">group</span> <span class="n">of</span> <span class="s1">&#39;developer&#39;</span>
+      <span class="n">ansible</span><span class="o">.</span><span class="n">builtin</span><span class="o">.</span><span class="n">user</span><span class="p">:</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">user1</span>
+        <span class="n">comment</span><span class="p">:</span> <span class="n">User</span> <span class="n">One</span>
+        <span class="n">uid</span><span class="p">:</span> <span class="mi">7654</span>
+        <span class="n">group</span><span class="p">:</span> <span class="n">developer</span>
+
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Add</span> <span class="n">the</span> <span class="n">user</span> <span class="s1">&#39;user2&#39;</span> <span class="k">with</span> <span class="n">a</span> <span class="n">bash</span> <span class="n">shell</span><span class="p">,</span> <span class="n">appending</span> <span class="n">the</span> <span class="n">group</span> <span class="s1">&#39;admins&#39;</span> <span class="ow">and</span> <span class="s1">&#39;developers&#39;</span> <span class="n">to</span> <span class="n">the</span> <span class="n">user</span><span class="s1">&#39;s groups</span>
+      <span class="n">ansible</span><span class="o">.</span><span class="n">builtin</span><span class="o">.</span><span class="n">user</span><span class="p">:</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">user2</span>
+        <span class="n">shell</span><span class="p">:</span> <span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">bash</span>
+        <span class="n">groups</span><span class="p">:</span> <span class="n">admins</span><span class="p">,</span><span class="n">developers</span>
+        <span class="n">append</span><span class="p">:</span> <span class="n">yes</span>
+
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Remove</span> <span class="n">the</span> <span class="n">user</span> <span class="s1">&#39;user1&#39;</span>
+      <span class="n">ansible</span><span class="o">.</span><span class="n">builtin</span><span class="o">.</span><span class="n">user</span><span class="p">:</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">user1</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">absent</span>
+        <span class="n">remove</span><span class="p">:</span> <span class="n">yes</span>
+
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Create</span> <span class="n">a</span> <span class="mi">2048</span><span class="o">-</span><span class="n">bit</span> <span class="n">SSH</span> <span class="n">key</span> <span class="k">for</span> <span class="n">user</span> <span class="n">user3</span> <span class="ow">in</span> <span class="o">~/</span><span class="n">user3</span><span class="o">/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span>
+      <span class="n">ansible</span><span class="o">.</span><span class="n">builtin</span><span class="o">.</span><span class="n">user</span><span class="p">:</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">user3</span>
+        <span class="n">generate_ssh_key</span><span class="p">:</span> <span class="n">yes</span>
+        <span class="n">ssh_key_bits</span><span class="p">:</span> <span class="mi">2048</span>
+        <span class="n">ssh_key_file</span><span class="p">:</span> <span class="o">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">id_rsa</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="where-can-we-find-ansible-modules">
+<h2>Where can we find Ansible modules?<a class="headerlink" href="#where-can-we-find-ansible-modules" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>ansible-doc documentation: <code class="docutils literal notranslate"><span class="pre">ansible-doc</span> <span class="pre">user</span></code></p></li>
+<li><p><a class="reference external" href="https://docs.ansible.com/ansible/latest/collections/ansible/builtin/index.html">Ansible docs</a></p></li>
+</ol>
+</section>
+<section id="how-to-debug-when-stuff-is-not-working">
+<h2>How to debug when stuff is not working?<a class="headerlink" href="#how-to-debug-when-stuff-is-not-working" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Make sure that you’re always checking if what you expect is there</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">debug</span></code> statements</p></li>
+<li><p>Use verbose <code class="docutils literal notranslate"><span class="pre">-vvvv</span></code></p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="architecture.html" class="btn btn-neutral float-left" title="2. Ansible architecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../project/introduction.html" class="btn btn-neutral float-right" title="0. Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, skillab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

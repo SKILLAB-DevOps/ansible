@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. Ansible architecture &mdash; DevOps 1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/max_width.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. Getting Started" href="gettingstarted.html" />
+    <link rel="prev" title="1. Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            DevOps
+              <img src="../_static/Logo.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Ansible</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">0. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Ansible architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">3. Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../project/introduction.html">0. Introduction</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DevOps</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">2. Ansible architecture</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/ansible/architecture.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ansible-architecture">
+<h1>2. Ansible architecture<a class="headerlink" href="#ansible-architecture" title="Permalink to this heading"></a></h1>
+<p>Ansible uses Master-Slave architecture, which means we have a Control Node, from where we are running the code, and Managed nodes where the code is run.</p>
+<a class="reference internal image-reference" href="../_images/ansible.drawio.png"><img alt="How Ansible works" src="../_images/ansible.drawio.png" style="width: 1000px;" /></a>
+<section id="a-simplified-explanation-of-how-ansible-works">
+<h2>A simplified explanation of how Ansible works<a class="headerlink" href="#a-simplified-explanation-of-how-ansible-works" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><strong>Inventory</strong>: Ansible maintains an inventory of all the nodes or servers that it manages. The inventory can be stored in a simple text file, or it can be a dynamic inventory that is generated by querying external systems such as cloud providers or other databases.</p></li>
+<li><p><strong>Playbooks</strong>: Ansible uses YAML files called “playbooks” to define the desired state of your infrastructure. Playbooks contain a series of tasks that should be executed on specific nodes. Each task specifies an action to be performed, such as installing a package, copying a file, or executing a command.</p></li>
+<li><p><strong>Modules</strong>: Ansible has a large collection of built-in “modules” that provide a wide range of functionality. Modules are used to perform tasks on the nodes, such as installing software, configuring services, or managing users. Modules can be written in any programming language and are executed on the nodes by Ansible.</p></li>
+<li><p><strong>SSH</strong>: Ansible communicates with the nodes over SSH by default, using the OpenSSH client. This means that no agent or daemon needs to be installed on the nodes, making it easy to manage heterogeneous environments.</p></li>
+<li><p><strong>Control Node</strong>: Ansible is installed and runs from a “control node” or a master machine that manages the infrastructure. The control node is responsible for running the playbooks, communicating with the nodes, and collecting and reporting the results.</p></li>
+</ol>
+<p>When you run an Ansible playbook, it connects to the nodes in your inventory, checks their current state against the desired state specified in the playbook, and makes the necessary changes to bring them into compliance. Ansible uses an “idempotent” model, which means that if a task has already been executed and the desired state has been achieved, the task is skipped on subsequent runs.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>But this idempotency disappears if you’re using the <code class="docutils literal notranslate"><span class="pre">shell</span></code> module.</p>
+</div>
+</section>
+<section id="what-is-ssh-baby-don-t-ping-don-t-ping-me-error">
+<h2>What is SSH, baby don’t ping, don’t ping me, error<a class="headerlink" href="#what-is-ssh-baby-don-t-ping-don-t-ping-me-error" title="Permalink to this heading"></a></h2>
+<p><strong>SSH (Secure Shell)</strong> is a protocol to securely connect to remote machines over an unsecured network. It is used to access remote servers and execute commands or perform tasks on them.</p>
+<p>SSH provides a secure, encrypted communication channel between two computers. It allows users to authenticate themselves using a public-key cryptography mechanism and then provides them with secure, encrypted access to the remote machine’s shell or command-line interface.</p>
+<p>There are two main versions of SSH: SSH1 and SSH2.
+SSH2 is the more modern and secure version and is widely used today. SSH2 supports a variety of authentication methods, including password authentication, public-key authentication, and host-based authentication.</p>
+<p>Use cases for SSH include:</p>
+<ol class="arabic simple">
+<li><p><strong>Remote access</strong> to servers: system administrators and developers remotely access servers and execute commands or perform tasks on them.</p></li>
+<li><p><strong>Secure file transfers</strong>: securely transfer files between machines using tools like SCP (Secure Copy) and SFTP (Secure File Transfer Protocol).</p></li>
+<li><p><strong>Tunneling</strong>: create encrypted tunnels between two machines, allowing secure communication between them, (in this way you can escape most of the proxies/firewalls from the companies)</p></li>
+</ol>
+</section>
+<section id="configuration-files">
+<h2>Configuration files<a class="headerlink" href="#configuration-files" title="Permalink to this heading"></a></h2>
+<p>Ansible supports several sources for configuring its behavior, including an <code class="docutils literal notranslate"><span class="pre">ini</span></code> file named <code class="docutils literal notranslate"><span class="pre">ansible.cfg</span></code>, environment variables, command-line options, playbook keywords, and variables.</p>
+<dl class="simple">
+<dt>Changes can be made and used in a configuration file which will be searched for in the following order:</dt><dd><ol class="arabic simple">
+<li><p>ANSIBLE_CONFIG (environment variable if set)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ansible.cfg</span></code> (in the current directory)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">~/.ansible.cfg</span></code> (in the home directory)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/etc/ansible/ansible.cfg</span></code></p></li>
+</ol>
+</dd>
+</dl>
+</section>
+<section id="variable-precedence">
+<h2>Variable precedence<a class="headerlink" href="#variable-precedence" title="Permalink to this heading"></a></h2>
+<p>Variable precedence in Ansible determines the order in which variables are evaluated and assigned values. In other words, when multiple variables have the same name, Ansible follows a specific order to decide which variable’s value should be used.</p>
+<p>The variable precedence order in Ansible is as follows (from lowest to highest precedence):</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Role defaults: Variables defined in a role’s defaults/main.yml file.</p></li>
+<li><p>Inventory variables: Variables defined in the inventory file, either globally or for a specific host or group.</p></li>
+<li><p>Play variables: Variables defined in the vars section of a play.</p></li>
+<li><p>Playbook variables: Variables defined in the vars section of a playbook.</p></li>
+<li><p>Extra variables: Variables defined using the -e command line option.</p></li>
+<li><p>Registered variables: Variables created using the register keyword in a task.</p></li>
+<li><p>Set_facts variables: Variables created using the set_fact module or action.</p></li>
+<li><p>Task variables: Variables created using the vars keyword in a task.</p></li>
+<li><p>Block variables: Variables created using the block keyword in a task.</p></li>
+<li><p>Role variables: Variables defined in a role’s vars/main.yml file.</p></li>
+<li><p>Include variables: Variables defined in a file included using the include_vars module or action.</p></li>
+</ol>
+</div></blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If multiple variables with the same name exist, the variable with the highest precedence takes precedence over the others. For example, if a variable is defined in both the inventory and playbook variables, the playbook variable takes precedence.</p>
+</div>
+</section>
+<section id="stateful-vs-stateless">
+<h2>Stateful vs Stateless<a class="headerlink" href="#stateful-vs-stateless" title="Permalink to this heading"></a></h2>
+<p>Ansible and Puppet are two popular configuration management tools used to automate the management of IT infrastructure. One key difference between them is the architecture they use to manage the configuration of the target nodes.</p>
+<p>Ansible follows a stateless architecture, while Puppet follows a stateful architecture.</p>
+<ol class="arabic simple">
+<li><p><strong>Stateless Architecture</strong></p></li>
+</ol>
+<p>In a stateless architecture, the configuration management tool does not maintain any information about the state of the target nodes. It uses a push-based approach to apply the desired state to the target nodes.</p>
+<p>In Ansible, the desired state of the target nodes is defined in the playbook using <code class="docutils literal notranslate"><span class="pre">YAML</span></code>. When the playbook is executed, Ansible pushes the configuration changes to the target nodes, without maintaining any information about their previous state. Each task in the playbook is executed independently, and there is no guarantee that the tasks will be executed in a particular order.</p>
+<ol class="arabic simple" start="2">
+<li><p><strong>Stateful Architecture</strong></p></li>
+</ol>
+<p>In a stateful architecture, the configuration management tool maintains a persistent connection to the target nodes and continuously monitors their state.</p>
+<p>In Puppet, the desired state of the target nodes is defined in a declarative language called <code class="docutils literal notranslate"><span class="pre">Puppet</span> <span class="pre">DSL</span></code>. Puppet continuously monitors the state of the target nodes, and if any configuration drift occurs, it applies the required changes to bring the node back to its desired state. Puppet uses a pull-based approach, where the target nodes periodically pull their configuration from the Puppet master.</p>
+<p>Puppet maintains a database of the state of each target node and applies changes in a particular order, based on their dependencies. This approach provides greater control and predictability over the configuration changes, but it also requires more overhead and management of the Puppet master.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="1. Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gettingstarted.html" class="btn btn-neutral float-right" title="3. Getting Started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, skillab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

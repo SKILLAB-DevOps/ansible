@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>0. Introduction &mdash; DevOps 1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/max_width.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Installation" href="installation.html" />
+    <link rel="prev" title="Ansible" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            DevOps
+              <img src="../_static/Logo.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Ansible</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">0. Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">2. Ansible architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gettingstarted.html">3. Getting Started</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../project/introduction.html">0. Introduction</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DevOps</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">0. Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/ansible/introduction.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction">
+<h1>0. Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h1>
+<a class="reference internal image-reference" href="../_images/ansible_how_it_works.drawio.png"><img alt="How Ansible works" src="../_images/ansible_how_it_works.drawio.png" style="width: 500px;" /></a>
+<p>Ansible is an open-source IT automation tool that automates infrastructure provisioning, configuration management, and application deployment. It allows you to manage and configure systems, networks, and applications through a simple, human-readable language called <code class="docutils literal notranslate"><span class="pre">YAML</span></code>.</p>
+<p>Ansible uses a push-based model, where a central control node pushes out commands to the managed nodes. The control node communicates with the managed nodes over <code class="docutils literal notranslate"><span class="pre">ssh</span></code> and does not require any additional software to be installed on the managed nodes.</p>
+<p>Ansible uses a concept called <code class="docutils literal notranslate"><span class="pre">playbooks</span></code> to define and execute automation tasks. A playbook is a <code class="docutils literal notranslate"><span class="pre">YAML</span></code> file that describes a set of tasks to be executed, along with their dependencies and configuration options. Playbooks can be used to automate tasks such as installing software, configuring services, and deploying applications.</p>
+<p>Ansible also provides a large number of pre-built modules that can be used to perform common tasks, such as managing files, users, and services. These modules can be used to automate tasks across a wide variety of systems and platforms, including Linux, Windows, and network devices.</p>
+<p>Ansible is a powerful automation tool that allows you to automate and manage your IT infrastructure in a simple, consistent, and repeatable way. It can help you save time and reduce errors by automating repetitive tasks and ensuring that your systems are configured consistently across your organization.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">---</span>
+<span class="o">-</span> <span class="n">hosts</span><span class="p">:</span> <span class="n">nodes</span>
+  <span class="n">become</span><span class="p">:</span> <span class="n">true</span>
+
+  <span class="n">tasks</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Install</span> <span class="p">(</span><span class="n">apt</span><span class="p">)</span> <span class="n">aptitude</span>
+      <span class="n">apt</span><span class="p">:</span>
+          <span class="n">name</span><span class="p">:</span> <span class="n">aptitude</span>
+          <span class="n">state</span><span class="p">:</span> <span class="n">latest</span>
+          <span class="n">update_cache</span><span class="p">:</span> <span class="n">true</span>
+
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Install</span> <span class="n">required</span> <span class="n">system</span> <span class="n">packages</span>
+      <span class="n">apt</span><span class="p">:</span>
+        <span class="n">pkg</span><span class="p">:</span>
+          <span class="o">-</span> <span class="n">apt</span><span class="o">-</span><span class="n">transport</span><span class="o">-</span><span class="n">https</span>
+          <span class="o">-</span> <span class="n">ca</span><span class="o">-</span><span class="n">certificates</span>
+          <span class="o">-</span> <span class="n">curl</span>
+          <span class="o">-</span> <span class="n">software</span><span class="o">-</span><span class="n">properties</span><span class="o">-</span><span class="n">common</span>
+          <span class="o">-</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span>
+          <span class="o">-</span> <span class="n">virtualenv</span>
+          <span class="o">-</span> <span class="n">python3</span><span class="o">-</span><span class="n">setuptools</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">latest</span>
+        <span class="n">update_cache</span><span class="p">:</span> <span class="n">true</span>
+
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Add</span> <span class="n">Docker</span> <span class="n">GPG</span> <span class="n">apt</span> <span class="n">Key</span>
+      <span class="n">apt_key</span><span class="p">:</span>
+        <span class="n">url</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">ubuntu</span><span class="o">/</span><span class="n">gpg</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">present</span>
+
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Add</span> <span class="n">Docker</span> <span class="n">Repository</span>
+      <span class="n">apt_repository</span><span class="p">:</span>
+        <span class="n">repo</span><span class="p">:</span> <span class="n">deb</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">ubuntu</span> <span class="n">focal</span> <span class="n">stable</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">present</span>
+
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Update</span> <span class="n">apt</span> <span class="ow">and</span> <span class="n">install</span> <span class="n">docker</span><span class="o">-</span><span class="n">ce</span>
+      <span class="n">apt</span><span class="p">:</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">docker</span><span class="o">-</span><span class="n">ce</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">latest</span>
+        <span class="n">update_cache</span><span class="p">:</span> <span class="n">true</span>
+
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Install</span> <span class="n">Docker</span> <span class="n">Module</span> <span class="k">for</span> <span class="n">Python</span>
+      <span class="n">pip</span><span class="p">:</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">docker</span>
+
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Pull</span> <span class="n">default</span> <span class="n">Docker</span> <span class="n">image</span>
+      <span class="n">community</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">docker_image</span><span class="p">:</span>
+        <span class="n">name</span><span class="p">:</span> <span class="n">ubuntu</span>
+        <span class="n">source</span><span class="p">:</span> <span class="n">pull</span>
+
+    <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Create</span> <span class="n">default</span> <span class="n">containers</span>
+      <span class="n">community</span><span class="o">.</span><span class="n">docker</span><span class="o">.</span><span class="n">docker_container</span><span class="p">:</span>
+        <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;docker{{ item }}&quot;</span>
+        <span class="n">image</span><span class="p">:</span> <span class="n">ubuntu</span>
+        <span class="n">command</span><span class="p">:</span> <span class="s2">&quot;touch /tmp/example1&quot;</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">present</span>
+    <span class="n">with_sequence</span><span class="p">:</span> <span class="n">count</span><span class="o">=</span><span class="mi">2</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Ansible" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="1. Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, skillab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
